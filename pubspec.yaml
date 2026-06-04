@@ -1,6 +1,6 @@
 name: otel_airbyte
 description: "Dartastic OpenTelemetry bridge for Airbyte (open-source ELT + Airbyte Cloud)."
-version: 0.1.0-beta.2
+version: 0.1.0-beta.3-wip
 repository: https://github.com/dartastic/otel_airbyte
 homepage: https://dartastic.io
 publish_to: https://pub.dartastic.io
