@@ -2,7 +2,6 @@
 // Copyright 2025-2026 Mindful Software LLC d/b/a Dartastic.io, All rights reserved.
 
 import 'package:dartastic_opentelemetry/dartastic_opentelemetry.dart';
-import 'package:dartastic_opentelemetry_api/dartastic_opentelemetry_api.dart';
 
 import 'otel_airbyte_suppression.dart';
 
@@ -80,95 +79,132 @@ Future<T> tracedAirbyte<T>({
   final t = tracer ?? OTel.tracerProvider().getTracer('otel_airbyte');
   final span = t.startSpan('airbyte $operation', kind: SpanKind.client);
   try {
-    span.setStringAttribute('rpc.system', 'airbyte');
-    span.setStringAttribute('rpc.method', operation);
+    span.addAttributes(
+        OTel.attributes([OTel.attributeString('rpc.system', 'airbyte')]));
+    span.addAttributes(
+        OTel.attributes([OTel.attributeString('rpc.method', operation)]));
     final r = await invoke();
     final res = r.result;
     if (res != null) {
       if (res.deployment != null) {
-        span.setStringAttribute('airbyte.deployment', res.deployment!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeString('airbyte.deployment', res.deployment!)]));
       }
       if (res.workspaceId != null) {
-        span.setStringAttribute('airbyte.workspace.id', res.workspaceId!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeString('airbyte.workspace.id', res.workspaceId!)]));
       }
       if (res.sourceId != null) {
-        span.setStringAttribute('airbyte.source.id', res.sourceId!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeString('airbyte.source.id', res.sourceId!)]));
       }
       if (res.sourceDefinition != null) {
-        span.setStringAttribute(
-            'airbyte.source.definition', res.sourceDefinition!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeString(
+              'airbyte.source.definition', res.sourceDefinition!)
+        ]));
       }
       if (res.sourceDockerImage != null) {
-        span.setStringAttribute(
-            'airbyte.source.docker_image', res.sourceDockerImage!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeString(
+              'airbyte.source.docker_image', res.sourceDockerImage!)
+        ]));
       }
       if (res.destinationId != null) {
-        span.setStringAttribute('airbyte.destination.id', res.destinationId!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeString('airbyte.destination.id', res.destinationId!)
+        ]));
       }
       if (res.destinationDefinition != null) {
-        span.setStringAttribute(
-            'airbyte.destination.definition', res.destinationDefinition!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeString(
+              'airbyte.destination.definition', res.destinationDefinition!)
+        ]));
       }
       if (res.destinationDockerImage != null) {
-        span.setStringAttribute(
-            'airbyte.destination.docker_image', res.destinationDockerImage!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeString(
+              'airbyte.destination.docker_image', res.destinationDockerImage!)
+        ]));
       }
       if (res.connectionId != null) {
-        span.setStringAttribute('airbyte.connection.id', res.connectionId!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeString('airbyte.connection.id', res.connectionId!)
+        ]));
       }
       if (res.connectionName != null) {
-        span.setStringAttribute('airbyte.connection.name', res.connectionName!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeString('airbyte.connection.name', res.connectionName!)
+        ]));
       }
       if (res.namespace != null) {
-        span.setStringAttribute('airbyte.namespace', res.namespace!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeString('airbyte.namespace', res.namespace!)]));
       }
       if (res.streamName != null) {
-        span.setStringAttribute('airbyte.stream.name', res.streamName!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeString('airbyte.stream.name', res.streamName!)]));
       }
       if (res.syncMode != null) {
-        span.setStringAttribute('airbyte.sync.mode', res.syncMode!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeString('airbyte.sync.mode', res.syncMode!)]));
       }
       if (res.jobId != null) {
-        span.setIntAttribute('airbyte.job.id', res.jobId!);
+        span.addAttributes(
+            OTel.attributes([OTel.attributeInt('airbyte.job.id', res.jobId!)]));
       }
       if (res.jobStatus != null) {
-        span.setStringAttribute('airbyte.job.status', res.jobStatus!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeString('airbyte.job.status', res.jobStatus!)]));
       }
       if (res.attemptNumber != null) {
-        span.setIntAttribute('airbyte.job.attempt', res.attemptNumber!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeInt('airbyte.job.attempt', res.attemptNumber!)]));
       }
       if (res.recordsEmitted != null) {
-        span.setIntAttribute('airbyte.records.emitted', res.recordsEmitted!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeInt('airbyte.records.emitted', res.recordsEmitted!)
+        ]));
       }
       if (res.recordsCommitted != null) {
-        span.setIntAttribute(
-            'airbyte.records.committed', res.recordsCommitted!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeInt('airbyte.records.committed', res.recordsCommitted!)
+        ]));
       }
       if (res.bytesEmitted != null) {
-        span.setIntAttribute('airbyte.bytes.emitted', res.bytesEmitted!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeInt('airbyte.bytes.emitted', res.bytesEmitted!)]));
       }
       if (res.bytesCommitted != null) {
-        span.setIntAttribute('airbyte.bytes.committed', res.bytesCommitted!);
+        span.addAttributes(OTel.attributes([
+          OTel.attributeInt('airbyte.bytes.committed', res.bytesCommitted!)
+        ]));
       }
       if (res.streamsCount != null) {
-        span.setIntAttribute('airbyte.streams.count', res.streamsCount!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeInt('airbyte.streams.count', res.streamsCount!)]));
       }
       if (res.durationMs != null) {
-        span.setIntAttribute('airbyte.duration_ms', res.durationMs!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeInt('airbyte.duration_ms', res.durationMs!)]));
       }
       if (res.statusCode != null) {
-        span.setIntAttribute('http.response.status_code', res.statusCode!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeInt('http.response.status_code', res.statusCode!)]));
       }
       if (res.errorCode != null) {
-        span.setStringAttribute('airbyte.error.code', res.errorCode!);
+        span.addAttributes(OTel.attributes(
+            [OTel.attributeString('airbyte.error.code', res.errorCode!)]));
       }
       final fail = res.errorCode != null ||
           (res.statusCode != null && res.statusCode! >= 400) ||
           res.jobStatus == 'failed' ||
           res.jobStatus == 'incomplete';
       if (fail) {
-        span.setStringAttribute(
-            ErrorResource.errorType.key, res.errorCode ?? 'airbyte.error');
+        span.addAttributes(OTel.attributes([
+          OTel.attributeString(
+              ErrorResource.errorType.key, res.errorCode ?? 'airbyte.error')
+        ]));
         span.setStatus(SpanStatusCode.Error, res.errorMessage);
       }
     }
