@@ -6,6 +6,7 @@ import 'package:dartastic_opentelemetry_api/dartastic_opentelemetry_api.dart';
 import 'otel_airbyte_suppression.dart';
 
 class AirbyteResult {
+  /// Creates a result.
   const AirbyteResult({
     this.deployment,
     this.workspaceId,
@@ -61,8 +62,13 @@ class AirbyteResult {
   final String? errorMessage;
 }
 
+/// What a traced call returned: the value for the caller plus fields
+/// recorded on the span.
 class AirbyteCallResult<T> {
+  /// Creates a call result.
   const AirbyteCallResult({required this.value, this.result});
+
+  /// The value returned to the caller.
   final T value;
   final AirbyteResult? result;
 }

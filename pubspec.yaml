@@ -2,7 +2,7 @@ name: otel_airbyte
 description: >-
   OpenTelemetry instrumentation for airbyte by Dartastic.io. Adds standard
   OpenTelemetry observability to applications that use airbyte.
-version: 0.1.0-wip
+version: 0.1.0
 repository: https://github.com/dartastic/otel_airbyte
 homepage: https://dartastic.io
 
